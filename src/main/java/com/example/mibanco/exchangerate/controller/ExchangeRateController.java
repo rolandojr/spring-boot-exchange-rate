@@ -1,10 +1,9 @@
 package com.example.mibanco.exchangerate.controller;
 
-import com.example.mibanco.exchangerate.builder.ResponseBuilder;
-import com.example.mibanco.exchangerate.services.ExchangeRateService;
 import com.example.mibanco.exchangerate.models.thirdparty.ExchangeRateConvertResponse;
 import com.example.mibanco.exchangerate.models.thirdparty.ExchangeRateRequest;
 import com.example.mibanco.exchangerate.models.thirdparty.ExchangeRateResponse;
+import com.example.mibanco.exchangerate.services.ExchangeRateService;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
 import io.reactivex.schedulers.Schedulers;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 @Slf4j
 @RestController
