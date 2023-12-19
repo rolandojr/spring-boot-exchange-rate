@@ -19,13 +19,13 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/exchange")
 @AllArgsConstructor
 public class ExchangeRateController {
 
     ExchangeRateService service;
 
-    @GetMapping("/exchange")
+    @GetMapping
     public Maybe<ResponseEntity<List<ExchangeRateResponse>>> findAllExchangeRate() {
         return service.findAllExchanges()
                 .toMaybe()
@@ -36,7 +36,7 @@ public class ExchangeRateController {
                 .subscribeOn(Schedulers.io());
     }
 
-    @GetMapping("/exchange/convert")
+    @GetMapping("/convert")
     public Single<ResponseEntity<ExchangeRateConvertResponse>> convertExchange(@RequestParam String from, @RequestParam String to, @RequestParam String amount) throws InterruptedException {
         ExchangeRateRequest request = ExchangeRateRequest.builder()
                 .from(from)
