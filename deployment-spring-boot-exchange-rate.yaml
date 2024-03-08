@@ -17,6 +17,13 @@ spec:
           image: rolandojavier13/spring-boot-exchange-rate:v1.0.1
           ports:
             - containerPort: 8081
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "250m"
+            limits:
+              memory: "1024Mi"
+              cpu: "500m"
 ---
 apiVersion: v1
 kind: Service
@@ -51,4 +58,32 @@ spec:
                 name: spring-boot-exchange-rate
                 port:
                   number: 8081
+---
+#apiVersion: autoscaling/v2
+#kind: HorizontalPodAutoscaler
+#metadata:
+#  name: spring-boot-exchange-rate
+#spec:
+#  scaleTargetRef:
+#    apiVersion: apps/v1
+#    kind: Deployment
+#    name: spring-boot-exchange-rate
+#  minReplicas: 1
+#  maxReplicas: 2
+#  metrics:
+#    - type: Resource
+#      resource:
+#        name: cpu
+#        target:
+#          type: Utilization
+#          averageUtilization: 120
+#    - type: Resource
+#      resource:
+#        name: memory
+#        target:
+#          type: Utilization
+#          averageUtilization: 120
+#
+
+
 

@@ -1,9 +1,16 @@
 server:
   port: ${PORT:8081}
 
+info:
+  project:
+    name: @project.name@
+    description: @project.description@
+    version: @project.version@
+    artifact-id: @project.artifactId@
+
 spring:
   application:
-    name: business-exchange-rate
+    name: spring-boot-exchange-rate
   datasource:
     url: jdbc:h2:mem:testdb
     h2:
