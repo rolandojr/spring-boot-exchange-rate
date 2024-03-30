@@ -1,5 +1,6 @@
 package com.example.mibanco.exchangerate.controller;
 
+import com.example.mibanco.exchangerate.configuration.ApplicationProperties;
 import com.example.mibanco.exchangerate.models.thirdparty.ExchangeRateConvertResponse;
 import com.example.mibanco.exchangerate.models.thirdparty.ExchangeRateRequest;
 import com.example.mibanco.exchangerate.models.thirdparty.ExchangeRateResponse;
@@ -15,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @RestController
@@ -23,7 +26,17 @@ import java.util.List;
 @AllArgsConstructor
 public class ExchangeRateController {
 
-    ExchangeRateService service;
+    private ExchangeRateService service;
+
+    private ApplicationProperties applicationProperties;
+
+    @GetMapping("/properties")
+    public Map<String, Object> getProperties() {
+        Map<String, Object> properties = new HashMap<>();
+        properties.put("component", applicationProperties.getComponent());
+        properties.put("description", applicationProperties.getDescription());
+        return properties;
+    }
 
     @GetMapping
     public Maybe<ResponseEntity<List<ExchangeRateResponse>>> findAllExchangeRate() {

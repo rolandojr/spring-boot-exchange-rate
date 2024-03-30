@@ -12,18 +12,22 @@ spec:
       labels:
         app: spring-boot-exchange-rate
     spec:
+      serviceAccountName: admin-role-sa
       containers:
         - name: spring-boot-exchange-rate
-          image: rolandojavier13/spring-boot-exchange-rate:v1.0.1
+          image: rolandojavier13/spring-boot-exchange-rate:v1.0.8
           ports:
             - containerPort: 8081
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: "dev"
           resources:
             requests:
               memory: "512Mi"
-              cpu: "250m"
+              cpu: "256m"
             limits:
               memory: "1024Mi"
-              cpu: "500m"
+              cpu: "512m"
 ---
 apiVersion: v1
 kind: Service
@@ -59,6 +63,33 @@ spec:
                 port:
                   number: 8081
 ---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: spring-boot-exchange-rate-dev
+data:
+#  application.yaml: |-
+#    api:
+#      configuration:
+#        description: this is a default description
+#  spring-boot-exchange-rate.yaml: |-
+#    api:
+#      configuration:
+#        description: this is a no profile description
+  spring-boot-exchange-rate-dev.yaml: |-
+    api:
+      configuration:
+        description: this is a dev description
+#  spring-boot-exchange-rate-cert.yaml: |-
+#    api:
+#      configuration:
+#        description: this is a cert description
+#  spring-boot-exchange-rate-prod.yaml: |-
+#    api:
+#      configuration:
+#        description: this is a prod description
+
+---
 #apiVersion: autoscaling/v2
 #kind: HorizontalPodAutoscaler
 #metadata:
@@ -84,6 +115,3 @@ spec:
 #          type: Utilization
 #          averageUtilization: 120
 #
-
-
-

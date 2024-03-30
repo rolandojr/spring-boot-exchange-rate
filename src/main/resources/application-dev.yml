@@ -8,7 +8,16 @@ info:
     version: @project.version@
     artifact-id: @project.artifactId@
 
+api:
+  configuration:
+    description: this is a dev description
+
+
 spring:
+  cloud:
+    kubernetes:
+      config:
+        name: spring-boot-exchange-rate
   application:
     name: spring-boot-exchange-rate
   datasource:
@@ -19,5 +28,3 @@ spring:
         path: /h2
   webflux:
     base-path: /trade-banking/currency/v1
-
-

@@ -1,0 +1,30 @@
+server:
+  port: ${PORT:8081}
+
+info:
+  project:
+    name: @project.name@
+    description: @project.description@
+    version: @project.version@
+    artifact-id: @project.artifactId@
+
+api:
+  configuration:
+    description: this is a description
+
+
+spring:
+  cloud:
+    kubernetes:
+      config:
+        name: spring-boot-exchange-rate-dev
+  application:
+    name: spring-boot-exchange-rate
+  datasource:
+    url: jdbc:h2:mem:testdb
+    h2:
+      console:
+        enabled: true
+        path: /h2
+  webflux:
+    base-path: /trade-banking/currency/v1
