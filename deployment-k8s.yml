@@ -15,12 +15,12 @@ spec:
       serviceAccountName: admin-role-sa
       containers:
         - name: spring-boot-exchange-rate
-          image: rolandojavier13/spring-boot-exchange-rate:v1.0.8
+          image: rolandojavier13/spring-boot-exchange-rate:v1.0.10
           ports:
             - containerPort: 8081
           env:
             - name: SPRING_PROFILES_ACTIVE
-              value: "dev"
+              value: "pro"
           resources:
             requests:
               memory: "512Mi"
@@ -68,26 +68,30 @@ kind: ConfigMap
 metadata:
   name: spring-boot-exchange-rate-dev
 data:
-#  application.yaml: |-
-#    api:
-#      configuration:
-#        description: this is a default description
-#  spring-boot-exchange-rate.yaml: |-
-#    api:
-#      configuration:
-#        description: this is a no profile description
-  spring-boot-exchange-rate-dev.yaml: |-
+  spring-boot-exchange-rate-dev.yml: |-
     api:
       configuration:
         description: this is a dev description
-#  spring-boot-exchange-rate-cert.yaml: |-
-#    api:
-#      configuration:
-#        description: this is a cert description
-#  spring-boot-exchange-rate-prod.yaml: |-
-#    api:
-#      configuration:
-#        description: this is a prod description
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: spring-boot-exchange-rate-cer
+data:
+  spring-boot-exchange-rate-cer.yml: |-
+    api:
+      configuration:
+        description: this is a cer description
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: spring-boot-exchange-rate-pro
+data:
+  spring-boot-exchange-rate-pro.yml: |-
+    api:
+      configuration:
+        description: this is a pro description
 
 ---
 #apiVersion: autoscaling/v2

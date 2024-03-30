@@ -14,10 +14,10 @@ api:
 
 
 spring:
-  cloud:
-    kubernetes:
-      config:
-        name: spring-boot-exchange-rate
+#  cloud:
+#    kubernetes:
+#      config:
+#        name: spring-boot-exchange-rate
   application:
     name: spring-boot-exchange-rate
   datasource:

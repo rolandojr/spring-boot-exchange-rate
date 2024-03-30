@@ -10,14 +10,14 @@ info:
 
 api:
   configuration:
-    description: this is a description
+    description: this is a default description
 
 
 spring:
-  cloud:
-    kubernetes:
-      config:
-        name: spring-boot-exchange-rate-dev
+#  cloud:
+#    kubernetes:
+#      config:
+#        name: spring-boot-exchange-rate-dev
   application:
     name: spring-boot-exchange-rate
   datasource:
