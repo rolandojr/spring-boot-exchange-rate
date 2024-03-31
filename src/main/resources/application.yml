@@ -13,8 +13,11 @@ api:
     description: this is a default description
 
 
+
 spring:
-#  cloud:
+  config:
+    import: optional:configserver:http://localhost:8888
+  #  cloud:
 #    kubernetes:
 #      config:
 #        name: spring-boot-exchange-rate-dev
