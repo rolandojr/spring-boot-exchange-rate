@@ -3,10 +3,10 @@ server:
 
 info:
   project:
-    name: @project.name@
-    description: @project.description@
-    version: @project.version@
-    artifact-id: @project.artifactId@
+    name: '@project.name@'
+    description: '@project.description@'
+    version: '@project.version@'
+    artifact-id: '@project.artifactId@'
 
 api:
   configuration:
@@ -15,12 +15,10 @@ api:
 
 
 spring:
-  config:
-    import: optional:configserver:http://localhost:8888
-  #  cloud:
-#    kubernetes:
-#      config:
-#        name: spring-boot-exchange-rate-dev
+  cloud:
+    config:
+      uri: http://${HOSTNAME_CONFIG:localhost:8888}
+      name: spring-boot-exchange-rate
   application:
     name: spring-boot-exchange-rate
   datasource:
