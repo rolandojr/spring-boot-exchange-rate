@@ -15,12 +15,12 @@ spec:
       serviceAccountName: admin-role-sa
       containers:
         - name: spring-boot-exchange-rate
-          image: rolandojavier13/spring-boot-exchange-rate:v1.0.10
+          image: rolandojavier13/spring-boot-exchange-rate:v1.0.1
           ports:
             - containerPort: 8081
           env:
             - name: SPRING_PROFILES_ACTIVE
-              value: "pro"
+              value: "dev"
           resources:
             requests:
               memory: "512Mi"
