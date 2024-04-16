@@ -1,0 +1,16 @@
+version: "3.9"
+services:
+  spring-boot-exchange-rate:
+    container_name: spring-boot-exchange-rate
+    image: spring-boot-exchange-rate:v1.0.4
+    ports:
+      - "8081:8081"
+    environment:
+      SPRING_PROFILES_ACTIVE: dev
+    networks:
+      - exchange-rate
+
+networks:
+  exchange-rate:
+    name: exchange-rate
+
