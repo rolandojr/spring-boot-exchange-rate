@@ -35,6 +35,8 @@ public class ExchangeRateController {
         Map<String, Object> properties = new HashMap<>();
         properties.put("component", applicationProperties.getComponent());
         properties.put("description", applicationProperties.getDescription());
+        properties.put("authorName", applicationProperties.getAuthorName());
+        properties.put("authorEmail", applicationProperties.getAuthorEmail());
         return properties;
     }
 

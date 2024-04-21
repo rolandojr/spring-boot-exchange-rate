@@ -9,6 +9,9 @@ info:
     artifact-id: @project.artifactId@
 
 api:
+  author:
+    name: rolando
+    email: rolandojavier.ramos@gmail.com
   configuration:
     description: this is a dev description
 
