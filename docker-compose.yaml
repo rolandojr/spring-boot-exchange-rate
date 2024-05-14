@@ -2,11 +2,13 @@ version: "3.9"
 services:
   spring-boot-exchange-rate:
     container_name: spring-boot-exchange-rate
-    image: spring-boot-exchange-rate:v1.0.4
+    image: rolandojavier13/spring-boot-exchange-rate:v1.0.0
+    pull_policy: always
     ports:
       - "8081:8081"
     environment:
       SPRING_PROFILES_ACTIVE: dev
+      HOSTNAME_CONFIG_SERVER: http://spring-boot-config-server:8888
     networks:
       - exchange-rate
 

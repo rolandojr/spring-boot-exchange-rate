@@ -1,0 +1,11 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: spring-boot-exchange-rate
+  config:
+    import: optional:configserver:${HOSTNAME_CONFIG_SERVER:http://localhost:8888}
+
+encrypt:
+  key: A5AA66C1C29731B4EADB5BFA2C37B
