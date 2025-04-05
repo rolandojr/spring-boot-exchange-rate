@@ -28,3 +28,5 @@ spring:
         path: /h2
   webflux:
     base-path: /trade-banking/currency/v1
+  codec:
+    max-in-memory-size: 100MB

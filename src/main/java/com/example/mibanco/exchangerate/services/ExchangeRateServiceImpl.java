@@ -33,12 +33,14 @@ public class ExchangeRateServiceImpl implements ExchangeRateService {
     @Override
     public Single<ExchangeRateConvertResponse> convertExchange(ExchangeRateRequest exchangeRateRequest) {
         return Single.fromCallable(() -> repository.findByFromCurrencyAndToCurrency(
-                exchangeRateRequest.getFrom(), exchangeRateRequest.getTo()))
-                .map(exchangeRate -> {
-                    String result = Utils.exchageResult(exchangeRate.getExchangeRate(), exchangeRateRequest.getAmount());
-                    return responseBuilder.buildExchangeRateConvertResponse(exchangeRate, exchangeRateRequest, result);
-                });
+                        exchangeRateRequest.getFrom(), exchangeRateRequest.getTo()))
+                .map(exchangeRate -> getExchangeRateConvertResponse(exchangeRateRequest, exchangeRate));
 
 
+    }
+
+    private ExchangeRateConvertResponse getExchangeRateConvertResponse(ExchangeRateRequest exchangeRateRequest, ExchangeRate exchangeRate) {
+        String result = Utils.exchageResult(exchangeRate.getExchangeRate(), exchangeRateRequest.getAmount());
+        return responseBuilder.buildExchangeRateConvertResponse(exchangeRate, exchangeRateRequest, result);
     }
 }
