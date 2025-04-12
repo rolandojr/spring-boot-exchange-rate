@@ -14,10 +14,6 @@ api:
 
 
 spring:
-  #  cloud:
-  #    kubernetes:
-  #      config:
-  #        name: spring-boot-exchange-rate-dev
   application:
     name: spring-boot-exchange-rate
   datasource:
