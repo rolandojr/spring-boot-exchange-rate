@@ -3,6 +3,7 @@ package com.example.mibanco.exchangerate.controller;
 import com.example.mibanco.exchangerate.models.thirdparty.ExchangeRateConvertResponse;
 import com.example.mibanco.exchangerate.models.thirdparty.ExchangeRateRequest;
 import com.example.mibanco.exchangerate.models.thirdparty.ExchangeRateResponse;
+import com.example.mibanco.exchangerate.models.thirdparty.Planet;
 import com.example.mibanco.exchangerate.services.ExchangeRateService;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
@@ -24,6 +25,7 @@ public class ExchangeRateController {
 
     @GetMapping
     public Maybe<ResponseEntity<List<ExchangeRateResponse>>> findAllExchangeRate() {
+        Planet planet = new Planet();
         return service.findAllExchanges()
                 .toMaybe()
                 .map(ResponseEntity::ok)
