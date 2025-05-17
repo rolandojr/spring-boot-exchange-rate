@@ -4,12 +4,13 @@ import com.example.mibanco.exchangerate.models.thirdparty.ExchangeRateConvertRes
 import com.example.mibanco.exchangerate.models.thirdparty.ExchangeRateRequest;
 import com.example.mibanco.exchangerate.models.thirdparty.ExchangeRateResponse;
 import io.reactivex.Single;
+import reactor.core.publisher.Mono;
 
 import java.util.List;
 
 public interface ExchangeRateService {
 
-    Single<List<ExchangeRateResponse>> findAllExchanges();
+    Mono<List<ExchangeRateResponse>> findAllExchanges();
 
-    Single<ExchangeRateConvertResponse> convertExchange(ExchangeRateRequest exchangeRateRequest);
+    Mono<ExchangeRateConvertResponse> convertExchange(ExchangeRateRequest exchangeRateRequest);
 }

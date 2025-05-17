@@ -7,11 +7,12 @@ import com.example.mibanco.exchangerate.models.thirdparty.Planet;
 import com.example.mibanco.exchangerate.services.ExchangeRateService;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
-import io.reactivex.schedulers.Schedulers;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Mono;
+import reactor.core.scheduler.Schedulers;
 
 import java.util.List;
 
@@ -24,17 +25,16 @@ public class ExchangeRateController {
     private ExchangeRateService service;
 
     @GetMapping
-    public Maybe<ResponseEntity<List<ExchangeRateResponse>>> findAllExchangeRate() {
+    public Mono<ResponseEntity<List<ExchangeRateResponse>>> findAllExchangeRate() {
         Planet planet = new Planet();
         return service.findAllExchanges()
-                .toMaybe()
                 .map(ResponseEntity::ok)
-                .switchIfEmpty(Maybe.fromCallable(() -> ResponseEntity.noContent().build()))
-                .subscribeOn(Schedulers.io());
+                .switchIfEmpty(Mono.fromCallable(() -> ResponseEntity.noContent().build()))
+                .subscribeOn(Schedulers.boundedElastic());
     }
 
     @GetMapping("/convert")
-    public Single<ResponseEntity<ExchangeRateConvertResponse>> convertExchange(@RequestParam String from, @RequestParam String to, @RequestParam String amount) {
+    public Mono<ResponseEntity<ExchangeRateConvertResponse>> convertExchange(@RequestParam String from, @RequestParam String to, @RequestParam String amount) {
         ExchangeRateRequest request = ExchangeRateRequest.builder()
                 .from(from)
                 .to(to)
@@ -42,6 +42,6 @@ public class ExchangeRateController {
 
         return service.convertExchange(request)
                 .map(ResponseEntity::ok)
-                .subscribeOn(Schedulers.io());
+                .subscribeOn(Schedulers.boundedElastic());
     }
 }

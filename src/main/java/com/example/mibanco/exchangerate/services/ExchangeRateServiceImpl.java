@@ -11,8 +11,11 @@ import io.reactivex.Flowable;
 import io.reactivex.Single;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -24,18 +27,18 @@ public class ExchangeRateServiceImpl implements ExchangeRateService {
 
 
     @Override
-    public Single<List<ExchangeRateResponse>> findAllExchanges() {
-        return Flowable.fromIterable(repository.findAll())
+    public Mono<List<ExchangeRateResponse>> findAllExchanges() {
+        return Flux.fromIterable(repository.findAll())
                 .map(responseBuilder::buildExchangeRateResponse)
-                .toList();
+                .collectList();
+
     }
 
     @Override
-    public Single<ExchangeRateConvertResponse> convertExchange(ExchangeRateRequest exchangeRateRequest) {
-        return Single.fromCallable(() -> repository.findByFromCurrencyAndToCurrency(
+    public Mono<ExchangeRateConvertResponse> convertExchange(ExchangeRateRequest exchangeRateRequest) {
+        return Mono.fromCallable(() -> repository.findByFromCurrencyAndToCurrency(
                         exchangeRateRequest.getFrom(), exchangeRateRequest.getTo()))
                 .map(exchangeRate -> getExchangeRateConvertResponse(exchangeRateRequest, exchangeRate));
-
 
     }
 
